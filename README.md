@@ -29,7 +29,7 @@ pinc (**p**retty **inc**lude) は設定ファイルにもとづいてファイ�
 
 pinc.yaml:
 ```yaml
-001:
+P001:
   url: index.html
   template: default.html
   partial:
@@ -111,4 +111,4 @@ hello world.
 ```
 
 
-pinc はこれを実現するためだけのアプリケーションです。（これから作ります。）
+pinc はこれを実現するためだけのアプリケーションです。

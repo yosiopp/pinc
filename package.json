@@ -10,6 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/yosiopp/pinc.git"
   },
+  "keywords": [
+    "include",
+    "template"
+  ],
   "author": "yosiopp",
   "license": "MIT",
   "bugs": {
