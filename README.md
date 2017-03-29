@@ -1,17 +1,13 @@
 # pinc
-pinc (**p**retty **inc**lude) は設定ファイルにもとづいてファイルインクルードを実現するインクルードエンジンです。
+pinc (**p**retty **inc**lude) は設定ファイル( pinc.yaml )にもとづいてファイルインクルードを実現するインクルードエンジンです。
 
-設定ファイル pinc.yaml には以下のような記述をします。
-```yaml
-(id):
-  url: path
-  template: path
-  partial:
-    (name1): path
-    (name2): path
-    (name3): path
-    ...
+## インストール
 ```
+npm install pinc
+```
+(※ `pinc` コマンドを利用する為には `npm install -g` でインストールするか node_modules/.bin/ にPATHを通す必要があります)
+
+## 用途
 
 例えば、以下のディレクトリ構成の場合を考えます。
 ```
@@ -54,6 +50,9 @@ template/default.html:
 </html>
 ```
 
+template ファイルに 埋め込み指示コード `{{ IDENTIFIER }}` を記載します。
+この時の IDENTIFIER は partial の属性名に対応します。
+
 partial/header.html:
 ```html
   <meta charset="utf-8">
@@ -70,13 +69,14 @@ partial/main.html:
 hello world.
 ```
 
-この状態で `pinc` コマンドを実行すると、カレントディレクトリにある pinc.yaml に基づいてインクルードが実行されます。
+この状態で `pinc` コマンドを実行すると、カレントディレクトリにある pinc.yaml に基づいてインクルードが実行されます。つまり、partial.headerであるheader.htmlの中身を `{{ header }}` に展開します。  
 ```shell
 $ pinc
+P001 -> index.html
 ```
 
 
-インクルード結果はdestディレクトリに出力されます。  
+インクルードされた結果は dest ディレクトリに出力されます。  
 その際のファイル名およびパスは url で指定したものになります。
 ```
 ./
@@ -110,5 +110,28 @@ hello world.
 </html>
 ```
 
-
 pinc はこれを実現するためだけのアプリケーションです。
+
+## pinc.yamlについて
+
+設定ファイル pinc.yaml には以下のような記述をします。
+```yaml
+(id):
+  url: path
+  template: path
+  partial:
+    (key): path
+```
+※ (id), (key) はそれぞれ任意の文字列
+
+* yamlハッシュのキーとして数値のみを指定することは推奨しません。その場合、意図しない動作をする可能性があります。
+* pinc.yaml に記載する id は処理には利用されませんが、yamlハッシュである性質上、ユニークでなければなりません。
+* pinc.yaml には yamlに準拠したコメント(#)を含めることができます。
+* template に指定したファイルが存在しない場合、エラー(Error)が発生し該当のファイルは作成されません。
+* partial に指定したファイルが存在しない場合、警告(Warn)が発生し空ファイルとみなして処理します。
+* template および partial に指定するファイルパスにはディレクトリを含めることができます。
+* url に指定するファイルパスにはディレクトリを含めることができます。生成時に自動的にディレクトリも作成します。
+
+## その他仕様
+* template ディレクトリ、 partial ディレクトリ、および pinc.yaml は `pinc` が動作する上で必須です。これらのディレクトリやファイルの名称を変更/指定することは出来ません（現時点では）
+* template ファイルに記載する埋め込み指示コード `{{ IDENTIFIER }}` は空白も含めて厳密でなければなりません。正規表現では `{{ \w+ }}` となります。
