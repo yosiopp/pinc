@@ -1,5 +1,5 @@
-# pinc (**p**retty **inc**lude)
-pinc は設定ファイルにもとづいてファイルインクルードを実現するインクルードエンジンです。
+# pinc
+pinc (__p__retty __inc__lude) は設定ファイルにもとづいてファイルインクルードを実現するインクルードエンジンです。
 
 設定ファイル pinc.yaml には以下のような記述をします。
 ```
@@ -25,7 +25,8 @@ pinc は設定ファイルにもとづいてファイルインクルードを実
         main.html
 ```
 
-```yaml:pinc.yaml
+pinc.yaml:
+```yaml
 001:
   url: index.html
   template: default.html
@@ -35,7 +36,8 @@ pinc は設定ファイルにもとづいてファイルインクルードを実
     main: main.html
 ```
 
-```html:template/default.html
+template/default.html:
+```html
 <!doctype html>
 <html lang="ja">
 <head>
@@ -50,16 +52,19 @@ pinc は設定ファイルにもとづいてファイルインクルードを実
 </html>
 ```
 
-```html:partial/header.html
+partial/header.html:
+```html
   <meta charset="utf-8">
 ```
 
-```html:partial/footer.html
+partial/footer.html
+```html
 <div>
 </div>
 ```
 
-```html:partial/main.html
+partial/main.html
+```html
 hello world.
 ```
 
