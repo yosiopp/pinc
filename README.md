@@ -2,7 +2,7 @@
 pinc (**p**retty **inc**lude) は設定ファイルにもとづいてファイルインクルードを実現するインクルードエンジンです。
 
 設定ファイル pinc.yaml には以下のような記述をします。
-```
+```yaml
 (id):
   url: path
   template: path
@@ -24,6 +24,8 @@ pinc (**p**retty **inc**lude) は設定ファイルにもとづいてファイ�
         footer.html
         main.html
 ```
+
+それぞれのファイル内容は以下のとおりです。
 
 pinc.yaml:
 ```yaml
@@ -57,18 +59,18 @@ partial/header.html:
   <meta charset="utf-8">
 ```
 
-partial/footer.html
+partial/footer.html:
 ```html
 <div>
 </div>
 ```
 
-partial/main.html
+partial/main.html:
 ```html
 hello world.
 ```
 
-`pinc` コマンドを実行すると、カレントディレクトリにある pinc.yaml に基づいてインクルードが実行されます。
+この状態で `pinc` コマンドを実行すると、カレントディレクトリにある pinc.yaml に基づいてインクルードが実行されます。
 ```shell
 $ pinc
 ```
@@ -89,7 +91,8 @@ $ pinc
         main.html
 ```
 
-dest/index.htmlの中身は以下のとおりです。partialの各ファイルの内容が展開されています。
+出力された dest/index.html の中身は以下のとおりです。  
+partialの各ファイルの内容が展開されています。
 
 ```html:dest/index.html
 <!doctype html>
