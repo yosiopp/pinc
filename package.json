@@ -1,6 +1,6 @@
 {
   "name": "pinc",
-  "version": "0.0.3",
+  "version": "0.2.0-a",
   "description": "pretty include engine",
   "main": "index.js",
   "bin": {
@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/yosiopp/pinc#readme",
   "dependencies": {
+    "argv": "0.0.2",
     "fs-extra": "^2.1.2",
     "js-yaml": "^3.8.2"
   }

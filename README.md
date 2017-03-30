@@ -127,11 +127,40 @@ pinc はこれを実現するためだけのアプリケーションです。
 * yamlハッシュのキーとして数値のみを指定することは推奨しません。その場合、意図しない動作をする可能性があります。
 * pinc.yaml に記載する id は処理には利用されませんが、yamlハッシュである性質上、ユニークでなければなりません。
 * pinc.yaml には yamlに準拠したコメント(#)を含めることができます。
-* template に指定したファイルが存在しない場合、エラー(Error)が発生し該当のファイルは作成されません。
-* partial に指定したファイルが存在しない場合、警告(Warn)が発生し空ファイルとみなして処理します。
+* template に指定した値 path が指すファイルが存在しない場合、エラー(Error)が発生し該当のファイルは作成されません。
+* partial に指定した値 path が指すファイルが存在しない場合、警告(Warn)が発生し空ファイルとみなして処理します。
+* partial に指定した値 path が@から始まる文字列の場合、それはファイルパスではなく文字列として扱われ、その文字列がそのままインクルード対象なります。(0.1.0 > )
 * template および partial に指定するファイルパスにはディレクトリを含めることができます。
-* url に指定するファイルパスにはディレクトリを含めることができます。生成時に自動的にディレクトリも作成します。
+* url に指定するファイルパスにはディレクトリを含めることができます。生成時にそのディレクトリも自動的に作成します。
 
 ## その他仕様
-* template ディレクトリ、 partial ディレクトリ、および pinc.yaml は `pinc` が動作する上で必須です。これらのディレクトリやファイルの名称を変更/指定することは出来ません（現時点では）
 * template ファイルに記載する埋め込み指示コード `{{ IDENTIFIER }}` は空白も含めて厳密でなければなりません。正規表現では `{{ \w+ }}` となります。
+* `pinc` が動作する上で template ディレクトリ、 partial ディレクトリ、および pinc.yaml は必須です。  
+  これらのディレクトリやファイルの名称を変更したい場合は `pinc --help` を参照ください
+  
+```
+$ pinc --help
+
+Usage: pinc [options] [target_yaml_file]
+
+	--help, -h
+		Displays help information about this script
+		'pinc -h' or 'pinc --help'
+
+	--version
+		Displays version info
+		pinc --version
+
+	--dest, -d
+		destination directory
+		pinc -d dest
+
+	--template, -t
+		template directory
+		pinc -t template'
+
+	--partial, -p
+		partial directory
+		pinc -p partial
+```
+
